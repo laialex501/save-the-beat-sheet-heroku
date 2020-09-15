@@ -63,7 +63,8 @@ const Login = (props) => {
                   });
               }}
               onFailure={(error) => {
-                debug("Error: ", error);
+                alert("There was an error");
+                console.log("Error: ", error);
               }}
             />
           </div>
