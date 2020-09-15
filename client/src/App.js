@@ -54,6 +54,7 @@ class App extends React.Component {
   }
 
   verifyLogin = () => {
+    debug("Verifying login status");
     // Make request to server to check if jwt token is present as a cookie in our browser
     const options = {
       method: "POST",
@@ -84,6 +85,7 @@ class App extends React.Component {
 
   // On login, set current user
   onLogin = (user) => {
+    debug("Setting logged in authentication status");
     localStorage.setItem("isAuthenticated", true);
     localStorage.setItem("user", JSON.stringify(user));
     this.setState({
@@ -94,6 +96,7 @@ class App extends React.Component {
 
   // On logout, clear current user
   onLogout = () => {
+    debug("Setting logged out authentication status");
     localStorage.setItem("isAuthenticated", false);
     localStorage.setItem("user", null);
     this.setState({

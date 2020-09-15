@@ -55,6 +55,7 @@ class BeatSheet extends React.Component {
 
   // Retrieves beat sheet from the server
   handleGetBeatSheet() {
+    debug("Getting beat sheet");
     const body = JSON.stringify({ beatSheetID: this.state.id });
     const options = {
       method: "POST",
@@ -279,6 +280,7 @@ class BeatSheet extends React.Component {
 
   // Saves the beat sheet to the server
   handleSaveBeatSheet() {
+    debug("Saving beat sheet");
     // Reset alert state to be updated after API call
     this.setState({ saveSuccess: null });
     // Save beat sheet to server

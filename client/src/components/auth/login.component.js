@@ -30,6 +30,9 @@ const Login = (props) => {
               buttonText="Login with Google"
               onSuccess={(response) => {
                 const id_token = response.tokenId;
+                debug(
+                  `Successful login response from google with id_token: ${id_token}`
+                );
                 const bearer = "Bearer " + id_token;
                 const options = {
                   method: "POST",
@@ -50,7 +53,7 @@ const Login = (props) => {
                 });
               }}
               onFailure={(error) => {
-                debug(error);
+                debug("Error: ", error);
               }}
             />
           </div>
