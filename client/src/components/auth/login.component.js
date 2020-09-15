@@ -2,26 +2,23 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { Container, Row, Col } from "react-bootstrap";
+import "../../styles/style.css";
 const debug = require("debug")("login.component");
 
 const Login = (props) => {
   const history = useHistory();
   return (
-    <Container fluid className="d-flex" style={{ height: "100vh" }}>
-      <Row className="align-self-center w-100" style={{}}>
+    <Container fluid className="d-flex fullscreen">
+      <Row className="align-self-center w-100">
         <Col
           xs={7}
           sm={6}
           md={5}
           lg={4}
           xl={3}
-          className="mx-auto d-flex flex-column bg-dark"
-          style={{ height: "60vh" }}
+          className="mx-auto d-flex flex-column bg-dark login"
         >
-          <div
-            className="mx-auto text-light my-3 "
-            style={{ fontSize: "2rem" }}
-          >
+          <div className="mx-auto text-light my-3 login-title">
             Log in to your account
           </div>
           <div className="mx-auto my-3 align-self-center">

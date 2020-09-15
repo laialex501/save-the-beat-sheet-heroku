@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import styleConfig from "./styleConfig";
+import { saveButtonVariant } from "../../styles/styleConfig";
 
 const SaveButton = (props) => {
   return (
     <Button
-      variant={styleConfig.saveButtonVariant}
+      variant={saveButtonVariant}
       className="float-right"
       onClick={() => {
         props.onClick();

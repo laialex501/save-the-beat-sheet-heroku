@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import DeleteButton from "../utils/delete-button.component";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import { InlineEditor, MinimumEditor } from "ckeditor5-build-custom";
+import "../../styles/style.css";
 
 // Act Component.
 const Act = (props) => {
@@ -30,7 +31,7 @@ const Act = (props) => {
       >
         <div className="w-75">
           {/* Title Editor */}
-          <div className="mx-2" style={{ marginBottom: "-10px" }}>
+          <div className="mx-2 title-editor">
             <CKEditor
               editor={MinimumEditor}
               data={act_name}
@@ -43,7 +44,7 @@ const Act = (props) => {
               }}
             />
           </div>
-          <hr style={{ borderTop: "1px solid white" }} />
+          <hr className="act-hr" />
           {/* Description editor */}
           <div className="mx-2">
             <CKEditor

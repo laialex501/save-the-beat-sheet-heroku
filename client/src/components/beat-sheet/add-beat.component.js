@@ -3,7 +3,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import styleConfig from "../utils/styleConfig";
+import "../../styles/style.css";
 
 const default_beat = {
   beat_name: "Untitled Beat",
@@ -17,8 +17,7 @@ const AddBeat = (props) => {
       {/* Button to add a new default beat. Modify function call to the default_beat template. */}
       <Button
         variant="light"
-        className="w-100 h-100"
-        style={{ minHeight: styleConfig.beatMinHeight }}
+        className="w-100 h-100 beat"
         onClick={() => {
           props.handleAddBeat(props.act_uuid, default_beat);
         }}

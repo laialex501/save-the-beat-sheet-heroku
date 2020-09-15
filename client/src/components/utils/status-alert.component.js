@@ -1,5 +1,9 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
+import {
+  saveSuccessAlertVariant,
+  saveFailureAlertVariant,
+} from "../../styles/styleConfig";
 
 const StatusAlert = (props) => {
   // If props.success does not exist then do not show
@@ -10,13 +14,15 @@ const StatusAlert = (props) => {
     <Alert
       show={show}
       onClose={() => props.onClose()}
-      variant={props.success ? "success" : "danger"}
+      className="m-5"
+      variant={
+        props.success ? saveSuccessAlertVariant : saveFailureAlertVariant
+      }
       dismissible
       transition
     >
       <Alert.Heading>{props.success ? "Success" : "Failure"}</Alert.Heading>
       <p>{props.success ? props.successMessage : props.failureMessage}</p>
-      <hr />
     </Alert>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import styleConfig from "../utils/styleConfig";
+import { createBeatSheetButtonVariant } from "../../styles/styleConfig";
 import { v4 as uuidv4 } from "uuid";
 import beatSheetTemplates from "../utils/beatSheetTemplates";
 
@@ -10,7 +10,7 @@ const default_beat_sheets = beatSheetTemplates.default_beat_sheets;
 const CreateBeatSheetDropdown = (props) => {
   return (
     <DropdownButton
-      variant={styleConfig.createBeatSheetButtonVariant}
+      variant={createBeatSheetButtonVariant}
       id="create-beat-sheet-dropdown"
       title="Create New Beat Sheet"
     >

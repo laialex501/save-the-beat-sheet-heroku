@@ -1,12 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { logoutButtonVariant } from "../../styles/styleConfig";
 const debug = require("debug")("logout-button.component");
 
 const Logout = (props) => {
   const history = useHistory();
   return (
     <Button
+      variant={logoutButtonVariant}
       onClick={() => {
         const options = {
           method: "POST",

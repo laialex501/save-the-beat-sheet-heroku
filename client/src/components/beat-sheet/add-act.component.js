@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import styleConfig from "../utils/styleConfig";
+import "../../styles/style.css";
 
 const default_act = {
   act_name: "Untitled Act",
@@ -20,8 +20,7 @@ const AddAct = (props) => {
         {/* Button to add a new default act */}
         <Button
           variant="dark"
-          className="w-100 h-100"
-          style={{ minHeight: styleConfig.addActMinHeight }}
+          className="w-100 h-100 add-act"
           onClick={() => props.handleAddAct(default_act)}
         >
           {/* Display icon for the button */}

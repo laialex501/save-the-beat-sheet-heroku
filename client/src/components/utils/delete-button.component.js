@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import styleConfig from "./styleConfig";
+import { deleteButtonVariant } from "../../styles/styleConfig";
 
 const DeleteButton = (props) => {
   // Params for function should be passed as an ARRAY of parameters
@@ -10,7 +10,7 @@ const DeleteButton = (props) => {
 
   return (
     <Button
-      variant={styleConfig.deleteButtonVariant}
+      variant={deleteButtonVariant}
       className="float-right"
       onClick={() => {
         props.onClick(...params);

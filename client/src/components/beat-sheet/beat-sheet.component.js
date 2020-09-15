@@ -10,6 +10,9 @@ import { InlineEditor, MinimumEditor } from "ckeditor5-build-custom";
 import SaveButton from "../utils/save-button.component";
 import Unauthorized from "../auth/unauthorized.component";
 import StatusAlert from "../utils/status-alert.component";
+import Loading from "../utils/loading.component";
+import Error from "../utils/error.component";
+import "../../styles/style.css";
 
 const debug = require("debug")("beat-sheet.component");
 
@@ -337,9 +340,9 @@ class BeatSheet extends React.Component {
 
   render() {
     if (this.state.exists === null || this.state.authorized === null)
-      return <div>Loading...</div>;
+      return <Loading />;
 
-    if (this.state.exists === false) return <div>Error 404 not found</div>;
+    if (this.state.exists === false) return <Error />;
 
     // User is not authenticated and not allowed to access this resource
     if (!this.state.isAuthenticated || !this.state.authorized)
@@ -358,7 +361,7 @@ class BeatSheet extends React.Component {
         <Row className="m-5">
           <Col xs={8} sm={8} md={8} lg={8} xl={8}>
             {/* Title Editor */}
-            <div className="mx-2" style={{ marginBottom: "-10px" }}>
+            <div className="mx-2 title-editor">
               <CKEditor
                 editor={MinimumEditor}
                 data={this.state.beat_sheet_name}

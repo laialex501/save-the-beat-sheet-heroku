@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // Bootstrap components
 import { Navbar, Nav } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 // Bootstrap styling
 import "bootstrap/dist/css/bootstrap.min.css";
 // Custom components
@@ -10,6 +9,7 @@ import Welcome from "./components/welcome.component";
 import BeatSheetList from "./components/beat-sheet-list/beat-sheet-list.component";
 import BeatSheet from "./components/beat-sheet/beat-sheet.component";
 import Login from "./components/auth/login.component";
+import LoginButton from "./components/auth/login-button.component";
 import LogoutButton from "./components/auth/logout-button.component";
 // Development templates
 import beatSheetTemplates from "./components/utils/beatSheetTemplates";
@@ -106,12 +106,14 @@ class App extends React.Component {
   };
 
   render() {
+    // Renders a login or logout button depending on whether we are authenticated
     var loginOrLogoutButton = this.state.isAuthenticated ? (
       <LogoutButton onLogout={this.onLogout} />
     ) : (
-      <Button href="/login">Login</Button>
+      <LoginButton />
     );
 
+    // Renders navbar elements depending on whether we are authenticated
     var navbar = this.state.isAuthenticated ? (
       <Nav className="mr-auto">
         <Nav.Link href="/beatsheets">View Beat Sheets</Nav.Link>

@@ -1,0 +1,70 @@
+.fullscreen {
+  height: 100vh;
+}
+
+.login {
+  height: 60vh;
+}
+
+.login-title {
+  font-size: 2rem;
+}
+
+.welcome-title {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.welcome-text {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 1.6rem;
+  text-align: center;
+}
+.error-text {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.beat {
+  min-height: 15rem;
+}
+
+.act {
+  min-height: 39rem;
+}
+
+.add-act {
+  min-height: 10rem;
+}
+
+.title-editor {
+  margin-bottom: -1rem;
+}
+
+.title-editor-beat {
+  width: 80%;
+}
+
+.delete-button-beat {
+  width: 20%;
+}
+
+.act-hr {
+  border-top: 1px solid white;
+}
+
+.title-beat-sheet-card {
+  width: 80%;
+}
+
+.delete-button-beat-sheet-card {
+  width: 20%;
+}
+
+.beat-sheet-card {
+  width: 100%;
+}

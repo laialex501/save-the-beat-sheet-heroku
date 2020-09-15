@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import { InlineEditor, MinimumEditor } from "ckeditor5-build-custom";
 import DeleteButton from "../utils/delete-button.component";
-import styleConfig from "../utils/styleConfig";
+import "../../styles/style.css";
 
 // Beat Component
 const Beat = (props) => {
@@ -12,19 +12,12 @@ const Beat = (props) => {
   const { beat_name, beat_description, act_uuid, beat_uuid } = props.beat_props;
   return (
     <Col className="my-3">
-      <Card
-        bg="light"
-        className="h-100"
-        style={{ minHeight: styleConfig.beatMinHeight }}
-      >
+      <Card bg="light" className="h-100 beat">
         {/* Beat content */}
         <Card.Body>
           <Card.Title className="d-flex align-items-center">
             {/* Title Editor */}
-            <div
-              className="mx-2"
-              style={{ width: "80%", marginBottom: "-10px" }}
-            >
+            <div className="mx-2 title-editor title-editor-beat">
               <CKEditor
                 editor={MinimumEditor}
                 data={beat_name}
@@ -38,7 +31,7 @@ const Beat = (props) => {
               />
             </div>
             {/* Delete Button */}
-            <div style={{ width: "20%" }}>
+            <div className="delete-button-beat">
               <DeleteButton
                 onClick={props.handleDeleteBeat}
                 params={[act_uuid, beat_uuid]}

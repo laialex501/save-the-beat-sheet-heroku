@@ -11,17 +11,17 @@ const BeatSheetCard = (props) => {
 
   return (
     <Col xl={4} lg={6} md={12} sm={12} className="my-3">
-      <Card bg="light" style={{ width: "100%" }}>
+      <Card bg="light" className="beat-sheet-card">
         <Card.Body>
           <Card.Title className="d-flex align-items-center">
             {/* Title */}
-            <div style={{ width: "80%" }}>
+            <div className="title-beat-sheet-card">
               {/* Strip HTML from input before displaying */}
               {stripHTML(beat_sheet.beat_sheet_name)}
             </div>
 
             {/* Delete Button */}
-            <div style={{ width: "20%" }}>
+            <div className="delete-button-beat-sheet-card">
               <DeleteButton
                 onClick={props.handleDeleteBeatSheet}
                 params={[beat_sheet.beat_sheet_uuid]}
