@@ -1,13 +1,16 @@
+// Essential imports for application
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-// const path = require("path");
+// Utilities
 const debug = require("debug")("server");
 const compression = require("compression");
 const helmet = require("helmet");
+const { expressCspHeader, INLINE, NONE, SELF } = require("express-csp-header");
+const path = require("path");
 
 // Run passport config (require syntax runs file)
 require("./auth/passport-config");
@@ -31,6 +34,24 @@ app.use(cors(corsOptions));
 
 // Middleware to set HTTP headers for protecting against common vulnerabilities
 app.use(helmet());
+
+// Set CSP headers
+app.use(
+  expressCspHeader({
+    directives: {
+      "default-src": [SELF],
+      "script-src": [
+        SELF,
+        INLINE,
+        "https://apis.google.com",
+        "https://accounts.google.com",
+      ],
+      "style-src": [SELF, INLINE],
+      "img-src": [SELF, "data:"],
+      "frame-src": ["https://accounts.google.com"],
+    },
+  })
+);
 
 // Body parsing middleware for requests
 app.use(bodyParser.json());
@@ -70,10 +91,10 @@ app.use("/api/beatsheets", beatSheetRouter);
 app.use("/api/auth", authRouter);
 
 // If no route is found, send the static React app
-/*app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build"));
-});*/
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
+});
 
 // Port config
 const port = process.env.PORT || process.env.SERVER_PORT;
