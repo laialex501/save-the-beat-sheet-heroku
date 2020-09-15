@@ -23,8 +23,8 @@ const app = express();
 debug("Initialized express app");
 
 // Enable cross-origin resource sharing
-const whitelist = process.env.CORS_WHITELIST.split(", ");
-debug("CORS whitelist is: ", whitelist);
+//const whitelist = process.env.CORS_WHITELIST.split(", ");
+//debug("CORS whitelist is: ", whitelist);
 const corsOptions = {
   origin: "*",
   credentials: true,
@@ -97,7 +97,7 @@ app.get("*", (req, res) => {
 });
 
 // Port config
-const port = process.env.PORT || process.env.SERVER_PORT;
+const port = process.env.PORT || 5000;
 
 // Run server
 app.listen(port, () => console.log(`Server up and running on port ${port}`));

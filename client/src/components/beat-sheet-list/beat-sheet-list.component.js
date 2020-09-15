@@ -37,6 +37,7 @@ class BeatSheetList extends React.Component {
 
   // Retrieve beat sheets belonging the user identified by our jwt token in browser cookie
   handleGetBeatSheets() {
+    debug("Getting beat sheets");
     const options = {
       method: "POST",
       mode: "cors",
