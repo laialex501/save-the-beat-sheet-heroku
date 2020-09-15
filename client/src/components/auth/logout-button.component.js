@@ -26,7 +26,7 @@ const Logout = (props) => {
         });
 
         props.onLogout();
-        history.push("/login");
+        history.push("/");
       }}
     >
       Log out
