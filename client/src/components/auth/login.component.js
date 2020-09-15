@@ -30,7 +30,7 @@ const Login = (props) => {
               buttonText="Login with Google"
               onSuccess={(response) => {
                 const id_token = response.tokenId;
-                debug(
+                console.log(
                   `Successful login response from google with id_token: ${id_token}`
                 );
                 const bearer = "Bearer " + id_token;
@@ -44,13 +44,23 @@ const Login = (props) => {
                   },
                 };
 
-                fetch("/api/auth/google", options).then((res) => {
-                  res.json().then((user) => {
-                    debug(`User is: ${user}`);
-                    props.onLogin(user);
-                    history.push("/beatsheets");
+                fetch("/api/auth/google", options)
+                  .then((res) => {
+                    if (res.status === 200) {
+                      console.log("Successfully verified login");
+                    } else {
+                      console.log("Failed to verify login");
+                    }
+                    console.log(res);
+                    return res;
+                  })
+                  .then((res) => {
+                    res.json().then((user) => {
+                      debug(`User is: ${user}`);
+                      props.onLogin(user);
+                      history.push("/beatsheets");
+                    });
                   });
-                });
               }}
               onFailure={(error) => {
                 debug("Error: ", error);
