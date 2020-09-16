@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import { InlineEditor, MinimumEditor } from "ckeditor5-build-custom";
 import SaveButton from "../utils/save-button.component";
+import Unauthenticated from "../auth/unauthenticated.component";
 import Unauthorized from "../auth/unauthorized.component";
 import StatusAlert from "../utils/status-alert.component";
 import Loading from "../utils/loading.component";
@@ -28,15 +29,15 @@ class BeatSheet extends React.Component {
     const id = this.props.id;
 
     this.state = {
-      exists: null,
-      authorized: null,
       beat_sheet_name: "",
       beat_sheet_description: "",
       author_username: "",
       author_id: "",
       acts: [],
-      isAuthenticated: isAuthenticated,
       id: id,
+      isAuthenticated: isAuthenticated,
+      exists: null,
+      isAuthorized: null,
       saveSuccess: null,
       isLoading: true,
     };
@@ -60,6 +61,7 @@ class BeatSheet extends React.Component {
   // Retrieves beat sheet from the server
   handleGetBeatSheet() {
     debug("Getting beat sheet");
+    // Create server request
     const body = JSON.stringify({ beatSheetID: this.state.id });
     const options = {
       method: "POST",
@@ -75,19 +77,19 @@ class BeatSheet extends React.Component {
       .then((res) => {
         debug(res);
         if (res.status === 200) {
-          this.setState({ exists: true, authorized: true });
+          this.setState({ exists: true, isAuthorized: true });
           debug("Successfully retrieved beat sheet");
           return res.json();
         } else if (res.status === 404 || res.status === 400) {
           debug("Beat sheet not found");
-          this.setState({ exists: false, authorized: false });
+          this.setState({ exists: false, isAuthorized: false });
           return;
         } else if (res.status === 401 || res.status === 403) {
           debug("Not authorized to access this beat sheet");
-          this.setState({ exists: true, authorized: false });
+          this.setState({ exists: true, isAuthorized: false });
         } else {
           debug("Failure to retrieve beat sheet");
-          this.setState({ exists: false, authorized: false });
+          this.setState({ exists: false, isAuthorized: false });
           return;
         }
       })
@@ -132,7 +134,7 @@ class BeatSheet extends React.Component {
           return new_act;
         });
 
-        // Set beat sheet data and isLoading flag to false
+        // Set beat sheet data and set loading to false once beat sheet is retrieved
         this.setState({
           beat_sheet_name,
           beat_sheet_description,
@@ -342,13 +344,17 @@ class BeatSheet extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading === true) return <Loading />;
+    // User is not authenticated and not allowed to access this resource
+    if (this.state.isAuthenticated === false) return <Unauthenticated />;
 
+    // There was an error in retrieving this resource, assume isAuthenticated != false
     if (this.state.exists === false) return <Error />;
 
-    // User is not authenticated or not allowed to access this resource
-    if (!this.state.isAuthenticated || !this.state.authorized)
-      return <Unauthorized />;
+    // Not authorized to access this resource, assume exists != false, isAuthenticated != false
+    if (this.state.isAuthorized === false) return <Unauthorized />;
+
+    // Loading resource until we know that we are not authenticated, not authorized, or there was an error
+    if (this.state.isLoading === true) return <Loading />;
 
     // User is authenticated and allowed to access this resource
     return (

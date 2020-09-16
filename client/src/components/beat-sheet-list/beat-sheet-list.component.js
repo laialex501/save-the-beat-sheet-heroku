@@ -5,7 +5,9 @@ import Row from "react-bootstrap/Row";
 import { v4 as uuidv4 } from "uuid";
 import BeatSheetCard from "./beat-sheet-card.component";
 import CreateBeatSheetDropdown from "./create-beat-sheet-dropdown.component";
-import Unauthorized from "../auth/unauthorized.component";
+import Unauthenticated from "../auth/unauthenticated.component";
+import Error from "../utils/error.component";
+import Loading from "../utils/loading.component";
 const debug = require("debug")("beat-sheet-list.component");
 
 class BeatSheetList extends React.Component {
@@ -24,6 +26,8 @@ class BeatSheetList extends React.Component {
       author_username,
       author_id,
       isAuthenticated,
+      isLoading: true,
+      error: null,
     };
 
     this.handleDeleteBeatSheet = this.handleDeleteBeatSheet.bind(this);
@@ -38,6 +42,8 @@ class BeatSheetList extends React.Component {
   // Retrieve beat sheets belonging the user identified by our jwt token in browser cookie
   handleGetBeatSheets() {
     debug("Getting beat sheets");
+    // Set loading flag to true
+    this.setState({ isLoading: true });
     const options = {
       method: "POST",
       mode: "cors",
@@ -52,9 +58,11 @@ class BeatSheetList extends React.Component {
       .then((res) => {
         if (res.status === 200) {
           debug("Successfully retrieved beat sheets");
+          this.setState({ error: false });
           return res.json();
         } else {
           debug("Failed to retrieve beat sheets");
+          this.setState({ error: true });
           return;
         }
       })
@@ -76,8 +84,10 @@ class BeatSheetList extends React.Component {
           return new_beat_sheet;
         });
 
+        // Set beat sheets and loading flag to false once we have retrieved data
         this.setState({
           beat_sheets: new_beat_sheets,
+          isLoading: false,
         });
       });
   }
@@ -137,10 +147,14 @@ class BeatSheetList extends React.Component {
   }
 
   render() {
-    if (!this.state) return <div>Error 404 not found</div>;
-
     // User is not authenticated and not allowed to access this resource
-    if (!this.state.isAuthenticated) return <Unauthorized />;
+    if (this.state.isAuthenticated === false) return <Unauthenticated />;
+
+    // There was an error in retrieving this resource, assume isAuthenticated != false
+    if (this.state.error === true) return <Error />;
+
+    // Loading resource until we know that we are not authenticated, not authorized, or there was an error
+    if (this.state.isLoading === true) return <Loading />;
 
     // User is authenticated and allowed to access this resource
     return (
