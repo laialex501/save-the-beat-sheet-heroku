@@ -7,4 +7,6 @@ module.exports = {
   createBeatSheetButtonVariant: "success",
   saveSuccessAlertVariant: "success",
   saveFailureAlertVariant: "danger",
+  loadingSpinnerAnimation: "border",
+  loadingSpinnerVariant: "dark",
 };

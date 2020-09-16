@@ -38,6 +38,7 @@ class BeatSheet extends React.Component {
       isAuthenticated: isAuthenticated,
       id: id,
       saveSuccess: null,
+      isLoading: true,
     };
 
     this.handleAddBeat = this.handleAddBeat.bind(this);
@@ -131,12 +132,14 @@ class BeatSheet extends React.Component {
           return new_act;
         });
 
+        // Set beat sheet data and isLoading flag to false
         this.setState({
           beat_sheet_name,
           beat_sheet_description,
           author_username,
           author_id,
           acts: new_acts,
+          isLoading: false,
         });
       });
   }
@@ -339,12 +342,11 @@ class BeatSheet extends React.Component {
   }
 
   render() {
-    if (this.state.exists === null || this.state.authorized === null)
-      return <Loading />;
+    if (this.state.isLoading === true) return <Loading />;
 
     if (this.state.exists === false) return <Error />;
 
-    // User is not authenticated and not allowed to access this resource
+    // User is not authenticated or not allowed to access this resource
     if (!this.state.isAuthenticated || !this.state.authorized)
       return <Unauthorized />;
 
