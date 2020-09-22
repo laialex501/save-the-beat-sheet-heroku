@@ -57,7 +57,7 @@ passport.use(
               debug("(Google) New user created: " + newUser);
             })
             .catch((err) => {
-              debug("Error: " + err);
+              debug("(Google) Error: " + err);
             });
 
           // Callback
@@ -90,7 +90,7 @@ passport.use(
         .then((user, err) => {
           if (err) {
             // An error occured
-            debug("Error: " + err);
+            debug("(JWT) Error: " + err);
             return done(err, false);
           }
           if (user) {
@@ -98,18 +98,18 @@ passport.use(
             // console.log("(JWT) User is: ", user);
 
             // Callback
-            debug("User is: ", user);
+            debug("(JWT) User is: ", user);
             done(null, user);
           } else {
             // If no user was found, jwt_token could not authenticated
 
             // Callback
-            debug("No user found");
+            debug("(JWT) No user found");
             done(null, false);
           }
         })
         .catch((err) => {
-          debug("Error: " + err);
+          debug("(JWT) Error: " + err);
         });
     }
   )

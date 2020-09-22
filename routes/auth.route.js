@@ -14,6 +14,7 @@ router.route("/google").post(
     if (!req.user) {
       return res.send(401, "User not authenticated");
     }
+    debug("User is: ", req.user);
     next();
   },
   generateToken,
@@ -37,6 +38,7 @@ router
   .post(
     [passport.authenticate("jwt", { session: false }), isLoggedIn],
     (req, res) => {
+      debug("Verified user as logged in");
       res.status(200).send(req.user);
     }
   );
